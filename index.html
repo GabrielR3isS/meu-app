@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Vê o Meu Amor 💖</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #000000, #1a1a1a);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        #container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        #countdown {
+            font-size: 3em;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+    </style>
+</head>
+<body>
+    <video id="video-bg" autoplay loop muted>
+        <source src="nos.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+    <audio id="audio" loop>
+        <source src="I_Wanna_Be_Yours.mp3" type="audio/mp3">
+        Seu navegador não suporta áudio HTML5.
+    </audio>
+    <div id="container">
+        <h1>💖 Vê o Meu Amor 💖</h1>
+        <p>⏳ Contagem regressiva para o nosso momento especial! ⏳</p>
+        <div id="countdown">❤️❤️❤️</div>
+    </div>
+    <script>
+        const eventDate = new Date("2025-02-20T18:30:00").getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = eventDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerText = `💞 ${days}d ${hours}h ${minutes}m ${seconds}s 💞`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        document.addEventListener("click", () => {
+            const audio = document.getElementById("audio");
+            audio.play();
+        });
+    </script>
+</body>
+</html>
