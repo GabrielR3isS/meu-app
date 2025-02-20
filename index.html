@@ -30,33 +30,37 @@
         #container {
             position: relative;
             z-index: 1;
-            padding: 5vw;
+            padding: 20px;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-            max-width: 80vw;
+            max-width: 90%;
             width: 400px;
         }
         #countdown {
-            font-size: 5vw;
+            font-size: 2.5em;
             margin-top: 20px;
             font-weight: bold;
         }
         h1 {
-            font-size: 6vw;
+            font-size: 2em;
         }
-        p {
-            font-size: 4vw;
-        }
-        @media (min-width: 768px) {
-            h1 { font-size: 2.5em; }
-            p { font-size: 1.2em; }
-            #countdown { font-size: 3em; }
+        @media (max-width: 600px) {
+            #countdown {
+                font-size: 2em;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            #container {
+                width: 90%;
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <video id="video-bg" autoplay loop muted>
+    <video id="video-bg" autoplay loop playsinline>
         <source src="nos.mp4" type="video/mp4">
         Seu navegador não suporta vídeos HTML5.
     </video>
@@ -85,7 +89,7 @@
         
         document.addEventListener("click", () => {
             const audio = document.getElementById("audio");
-            audio.play();
+            audio.play().catch(error => console.log("Erro ao reproduzir áudio: ", error));
         });
     </script>
 </body>
