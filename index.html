@@ -43,23 +43,46 @@
         h1 {
             font-size: 2.5em;
         }
+        #play-music {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 25px;
+            font-size: 18px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 2;
+        }
+        #play-music:hover {
+            background-color: #e91e63;
+        }
     </style>
 </head>
 <body>
-    <video id="video-bg" autoplay loop muted>
+    <video id="video-bg" autoplay loop muted playsinline>
         <source src="nos.mp4" type="video/mp4">
         Seu navegador não suporta vídeos HTML5.
     </video>
+    
     <audio id="audio" loop>
         <source src="I_Wanna_Be_Yours.mp3" type="audio/mp3">
         Seu navegador não suporta áudio HTML5.
     </audio>
+
+    <button id="play-music">🎵 Tocar Música 🎵</button>
+
     <div id="container">
         <h1>💖 Vê o Meu Amor 💖</h1>
         <p>⏳ Contagem regressiva para o nosso momento especial! ⏳</p>
         <div id="countdown">❤️❤️❤️</div>
     </div>
+
     <script>
+        // Contagem regressiva
         const eventDate = new Date("2025-02-20T18:30:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
@@ -72,10 +95,18 @@
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
-        
-        document.addEventListener("click", () => {
+
+        // Música só toca após interação
+        document.getElementById("play-music").addEventListener("click", () => {
             const audio = document.getElementById("audio");
             audio.play();
+            document.getElementById("play-music").style.display = "none"; // Esconde o botão após tocar
+        });
+
+        // Garante que o vídeo será reproduzido em dispositivos móveis
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById("video-bg");
+            video.play().catch(error => console.log("Erro ao reproduzir vídeo:", error));
         });
     </script>
 </body>
