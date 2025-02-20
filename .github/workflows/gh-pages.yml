@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Ou qualquer outra branch que você esteja usando
+      - main  # Ou a branch que você está usando
 
 jobs:
   deploy:
@@ -12,9 +12,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Set up Git config
+        run: git config --global user.name "GitHub Actions" && git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Aqui publicamos tudo da raiz do repositório
-
+          personal_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./  # Publica tudo da raiz
