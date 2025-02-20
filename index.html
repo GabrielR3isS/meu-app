@@ -30,59 +30,46 @@
         #container {
             position: relative;
             z-index: 1;
-            padding: 20px;
+            padding: 5vw;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            max-width: 80vw;
+            width: 400px;
         }
         #countdown {
-            font-size: 3em;
+            font-size: 5vw;
             margin-top: 20px;
             font-weight: bold;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 6vw;
         }
-        #play-music {
-            position: absolute;
-            top: 80%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 15px 25px;
-            font-size: 18px;
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            z-index: 2;
+        p {
+            font-size: 4vw;
         }
-        #play-music:hover {
-            background-color: #e91e63;
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5em; }
+            p { font-size: 1.2em; }
+            #countdown { font-size: 3em; }
         }
     </style>
 </head>
 <body>
-    <video id="video-bg" autoplay loop muted playsinline>
+    <video id="video-bg" autoplay loop muted>
         <source src="nos.mp4" type="video/mp4">
         Seu navegador não suporta vídeos HTML5.
     </video>
-    
     <audio id="audio" loop>
         <source src="I_Wanna_Be_Yours.mp3" type="audio/mp3">
         Seu navegador não suporta áudio HTML5.
     </audio>
-
-    <button id="play-music">🎵 Tocar Música 🎵</button>
-
     <div id="container">
         <h1>💖 Vê o Meu Amor 💖</h1>
         <p>⏳ Contagem regressiva para o nosso momento especial! ⏳</p>
         <div id="countdown">❤️❤️❤️</div>
     </div>
-
     <script>
-        // Contagem regressiva
         const eventDate = new Date("2025-02-20T18:30:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
@@ -95,18 +82,10 @@
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
-
-        // Música só toca após interação
-        document.getElementById("play-music").addEventListener("click", () => {
+        
+        document.addEventListener("click", () => {
             const audio = document.getElementById("audio");
             audio.play();
-            document.getElementById("play-music").style.display = "none"; // Esconde o botão após tocar
-        });
-
-        // Garante que o vídeo será reproduzido em dispositivos móveis
-        document.addEventListener("DOMContentLoaded", function () {
-            const video = document.getElementById("video-bg");
-            video.play().catch(error => console.log("Erro ao reproduzir vídeo:", error));
         });
     </script>
 </body>
